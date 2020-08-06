@@ -7,7 +7,7 @@ function show(element) {
 
 console.log('Список городов-миллионников Украины:');
 cities.forEach(show);
-// end
+// end forEach
 
 
 // map
@@ -24,7 +24,7 @@ console.log('В градусах Цельсия:');
 console.log(celsius);
 console.log('По Фаренгейту:');
 console.log(fahrenheit);
-// end
+// end map
 
 
 // filter
@@ -38,29 +38,29 @@ console.log('Участники соревнований:');
 console.log(competitors);
 console.log('Тройка победителей:');
 console.log(winners);
-// end
+// end filter
 
 
 // some
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-//Проверяем, есть ли в данном массиве числа, которые делятся без остатка на 2 и 3
+// Проверяем, есть ли в данном массиве числа, которые делятся без остатка на 2 и 3
 const newData = data.some(function (element) {
   return element % 2 === 0 && element % 3 === 0;
 });
 
 console.log(newData);
-// end
+// end some
 
 
 // every
 const data = [3, 28, 64, 814, '46', 5, 133];
 
-//Провеяем, все ли элементы массива являются числами
+// Провеяем, все ли элементы массива являются числами
 const numbers = data.every(function (element) {
   return typeof element === 'number';
 });
 
 console.log(data);
 console.log(numbers);
-// end
+// end every
