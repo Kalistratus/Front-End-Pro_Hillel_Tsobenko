@@ -1,66 +1,115 @@
-// forEach
-const cities = ['Киев', 'Харьков', 'Одесса'];
+// ----- forEach -----
+const cities = ["Киев", "Харьков", "Одесса", 'Днепр', 'Донецк'];
 
-function show(element) {
-  console.log(`- ${element}`);
+// callback
+function show(element, index) {
+  let position = index + 1;
+  console.log(`${element} - город № ${position} по численности населения в Украине`);
 }
 
-console.log('Список городов-миллионников Украины:');
-cities.forEach(show);
-// end forEach
+function getForEach(array, callback) {
+  array.forEach(show);
+}
 
+getForEach(cities, show);
+// ----- end forEach -----
 
-// map
+// ----- map -----
 const celsius = [-24.8, 0, 15, 36.7, 68, 100];
+let fahrenheit;
 
+// callback
 function convertTemp(element) {
   Math.floor(element);
   return element * 1.8 + 32;
 }
 
-const fahrenheit = celsius.map(convertTemp);
+function getMap(array, callback) {
+  fahrenheit = array.map(convertTemp);
+  console.log(fahrenheit);
 
-console.log('В градусах Цельсия:');
-console.log(celsius);
-console.log('По Фаренгейту:');
-console.log(fahrenheit);
-// end map
+  // сравнение значений °С = °F на одной строке
+  for (let i = 0; i < array.length; i++) {
+    let a = celsius[i];
+    let b = fahrenheit[i];
+    console.log(`${a}°С = ${b}°F`);
+  }
+}
 
+getMap(celsius, convertTemp);
+// ----- end map-----
 
-// filter
-const competitors = ["Женя", "Яна", "Семён", "Мария", "Виталий", 'Вероника'];
+// ----- filter -----
+const competitors = ["Женя", "Яна", "Семён", "Мария", "Виталий", "Вероника"];
+let winners;
 
-const winners = competitors.filter(function (element, index) {
-  return index < 3;
-});
+// callback
+function showTopFree(element, index) {
+  if (index < 3) {
+    return element;
+  }
+}
 
-console.log('Участники соревнований:');
-console.log(competitors);
-console.log('Тройка победителей:');
-console.log(winners);
-// end filter
+function getFiler(array, callback) {
+  winners = array.filter(showTopFree);
+  console.log(winners);
 
+  for (let i = 0; i < winners.length; i++) {
+    let a = array[i];
 
-// some
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let place;
 
-// Проверяем, есть ли в данном массиве числа, которые делятся без остатка на 2 и 3
-const newData = data.some(function (element) {
-  return element % 2 === 0 && element % 3 === 0;
-});
+    switch (i) {
+      case 0:
+        place = "первое";
+        break;
+      case 1:
+        place = "второе";
+        break;
+      case 2:
+        place = "третье";
+        break;
+      default:
+        place = undefined;
+    }
 
+    console.log(`${a} - занял ${place} место`);
+  }
+}
+
+getFiler(competitors, showTopFree);
+// ----- end filter-----
+
+// ----- some -----
+const data = [3, -7, 16, 24, 0, -32, 85, 69, -100];
+let newData;
+
+function showNegativeNumbers(element) {
+  return element < 0;
+}
+
+function getSome(array, callback) {
+  newData = array.some(showNegativeNumbers);
+}
+
+getSome(data, showNegativeNumbers);
 console.log(newData);
-// end some
+// ----- end some-----
 
-
-// every
+// ----- every -----
 const data = [3, 28, 64, 814, '46', 5, 133];
+let newData;
 
-// Провеяем, все ли элементы массива являются числами
-const numbers = data.every(function (element) {
+function showNumbers(element) {
+  return typeof element === 'number';
+}
+
+function getEvery(array, callback) {
+  newData = array.every(showNumbers);
+  console.log(newData);
+}
+
+getEvery(data, function (element) {
   return typeof element === 'number';
 });
-
-console.log(data);
-console.log(numbers);
-// end every
+// ----- end every-----
