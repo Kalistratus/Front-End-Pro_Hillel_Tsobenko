@@ -30,7 +30,7 @@ function getMap(array, callback) {
 
   // сравнение значений °С = °F на одной строке
   for (let i = 0; i < array.length; i++) {
-    let a = celsius[i];
+    let a = array[i];
     let b = fahrenheit[i];
     console.log(`${a}°С = ${b}°F`);
   }
