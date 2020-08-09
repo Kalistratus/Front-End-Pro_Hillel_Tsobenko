@@ -1,14 +1,22 @@
 // ----- forEach -----
-const cities = ["Киев", "Харьков", "Одесса", 'Днепр', 'Донецк'];
+const cities = ["Киев", "Харьков", "Одесса", "Днепр", "Донецк"];
 
-// callback
-function show(element, index) {
-  let position = index + 1;
-  console.log(`${element} - город № ${position} по численности населения в Украине`);
+function show(element) {
+  return element;
 }
 
 function getForEach(array, callback) {
-  array.forEach(show);
+  for (let i = 0; i < array.length; i++) {
+    const position = i + 1;
+    const city = callback(array[i]);
+
+    // Проверка, что в качестве аргумента - строка
+    typeof city === "string"
+      ? console.log(
+          `${city} - город № ${position} по численности населения в Украине`
+        )
+      : console.log(undefined);
+  }
 }
 
 getForEach(cities, show);
@@ -16,100 +24,86 @@ getForEach(cities, show);
 
 // ----- map -----
 const celsius = [-24.8, 0, 15, 36.7, 68, 100];
-let fahrenheit;
+const fahrenheit = [];
 
-// callback
 function convertTemp(element) {
   Math.floor(element);
   return element * 1.8 + 32;
 }
 
 function getMap(array, callback) {
-  fahrenheit = array.map(convertTemp);
-  console.log(fahrenheit);
-
-  // сравнение значений °С = °F на одной строке
   for (let i = 0; i < array.length; i++) {
-    let a = array[i];
-    let b = fahrenheit[i];
-    console.log(`${a}°С = ${b}°F`);
+    const newTemp = callback(array[i]);
+
+    // Проверка, что в качестве аргумента - число
+    typeof array[i] === "number"
+      ? fahrenheit.push(newTemp)
+      : fahrenheit.push(undefined);
   }
+  console.log(fahrenheit);
 }
 
 getMap(celsius, convertTemp);
 // ----- end map-----
 
 // ----- filter -----
-const competitors = ["Женя", "Яна", "Семён", "Мария", "Виталий", "Вероника"];
-let winners;
+const data = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+const newData = [];
 
-// callback
-function showTopFree(element, index) {
-  if (index < 3) {
-    return element;
-  }
+function res(element) {
+  return element % 2 === 0 && element % 3 === 0;
 }
 
 function getFiler(array, callback) {
-  winners = array.filter(showTopFree);
-  console.log(winners);
-
-  for (let i = 0; i < winners.length; i++) {
-    let a = array[i];
-
-    let place;
-
-    switch (i) {
-      case 0:
-        place = "первое";
-        break;
-      case 1:
-        place = "второе";
-        break;
-      case 2:
-        place = "третье";
-        break;
-      default:
-        place = undefined;
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i]) && typeof array[i] === "number") {
+      newData.push(array[i]);
     }
-
-    console.log(`${a} - занял ${place} место`);
   }
-}
-
-getFiler(competitors, showTopFree);
-// ----- end filter-----
-
-// ----- some -----
-const data = [3, -7, 16, 24, 0, -32, 85, 69, -100];
-let newData;
-
-function showNegativeNumbers(element) {
-  return element < 0;
-}
-
-function getSome(array, callback) {
-  newData = array.some(showNegativeNumbers);
-}
-
-getSome(data, showNegativeNumbers);
-console.log(newData);
-// ----- end some-----
-
-// ----- every -----
-const data = [3, 28, 64, 814, '46', 5, 133];
-let newData;
-
-function showNumbers(element) {
-  return typeof element === 'number';
-}
-
-function getEvery(array, callback) {
-  newData = array.every(showNumbers);
   console.log(newData);
 }
 
-getEvery(data, function (element) {
-  return typeof element === 'number';
-});
+getFiler(data, res);
+// ----- end filter-----
+
+// ----- some -----
+const data = [3, -7, 16, 24, 1, 32, -85, 69, 100];
+const newData = [];
+
+function showNegativeNumbers(element) {
+  return element <= 0;
+}
+
+function getSome(array, callback) {
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i]) && typeof array[i] === "number") {
+      newData.push(array[i]);
+    }
+  }
+
+  newData.length !== 0 ? console.log(true) : console.log(false);
+}
+
+getSome(data, showNegativeNumbers);
+// ----- end some-----
+
+// ----- every -----
+const data = [3, 28, 64, 814, "46", 5, 133];
+const newData = [];
+
+function showOnlyNumbers(element) {
+  return typeof element === "number";
+}
+
+function getSome(array, callback) {
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i])) {
+      newData.push(array[i]);
+    }
+  }
+
+  data.length === newData.length ? console.log(true) : console.log(false);
+}
+
+getSome(data, showOnlyNumbers);
 // ----- end every-----
