@@ -95,7 +95,7 @@ function showOnlyNumbers(element) {
   return typeof element === "number";
 }
 
-function getSome(array, callback) {
+function getEvery(array, callback) {
   for (let i = 0; i < array.length; i++) {
     if (callback(array[i])) {
       newData.push(array[i]);
@@ -105,5 +105,5 @@ function getSome(array, callback) {
   data.length === newData.length ? console.log(true) : console.log(false);
 }
 
-getSome(data, showOnlyNumbers);
+getEvery(data, showOnlyNumbers);
 // ----- end every-----
