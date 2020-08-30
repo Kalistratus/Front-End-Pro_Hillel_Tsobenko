@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 260px;
+    }
+
+    li {
+      border: 1px solid black;
+      margin: 3px 0;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      background-color: #a9a9a9;
+    }
+
+    li:nth-child(2n) {
+      background-color: #d4d3d3;
+    }
+
+    .user {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id='wrapper'></div>
+  <script src="script.js"></script>
+</body>
+</html>
