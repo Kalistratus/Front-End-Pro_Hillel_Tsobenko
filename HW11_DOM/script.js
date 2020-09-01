@@ -1,28 +1,35 @@
 const wrapper = document.querySelector("#wrapper");
+
 if (wrapper !== null) {
-    const list = createList();
+    const list = createUserListContainer();
     const form = createForm((value) => {
-        const li = createListItem();
-        const liSpan = createListItemSpan({ text: value });
-        const btnEdit = createListItemBtnEdit({ text: "Edit" });
-        const btnDel = createListItemBtnDel({ text: "Del" });
-        list.appendChild(li);
-        li.appendChild(liSpan);
-        li.appendChild(btnEdit);
-        li.appendChild(btnDel);
+        const card = createUserCard({
+            text: value
+        });
+        list.appendChild(card);
     });
+
+    const names = ["John", "Pete", "Amy"];
+
+    for (const user of names) {
+        const card = createUserCard({
+            text: user
+        });
+        list.appendChild(card);
+    }
 
     wrapper.appendChild(form);
     wrapper.appendChild(list);
+
 }
+
 
 function createForm(onAdd) {
     const container = document.createElement("div");
     container.className = "form";
 
     const okButton = createButton({
-        text: "OK",
-        className: "primary",
+        text: "Add",
         disabled: true
     });
 
@@ -51,18 +58,10 @@ function createForm(onAdd) {
     container.appendChild(label);
     container.appendChild(input);
     container.appendChild(okButton);
-    
+
     return container;
 }
 
-function createInput(props) {
-    const placeholder = props.placeholder || "";
-
-    const input = document.createElement("input");
-    input.placeholder = placeholder;
-
-    return input;
-}
 
 function createLabel(props) {
     const text = props.text || "";
@@ -73,43 +72,60 @@ function createLabel(props) {
     return label;
 }
 
+
+function createInput(props) {
+    const placeholder = props.placeholder || "";
+
+    const input = document.createElement("input");
+    input.placeholder = placeholder;
+
+    return input;
+}
+
+
 function createButton(props) {
     const text = props.text || "";
-    const className = props.className || "";
     const disabled = props.disabled || false;
 
     const button = document.createElement("button");
 
     button.type = "button";
     button.innerHTML = text;
-    button.className = className;
     button.disabled = disabled;
 
     return button;
 }
 
-function createList() {
-    return document.createElement("ul");
+
+function createUserListContainer() {
+    const list = document.createElement("div");
+    list.className = "list_container";
+
+    return list;
 }
 
-function createListItem() {
-    return element = document.createElement("li");
+
+function createUserCardContainer() {
+    const card = document.createElement("div");
+    card.className = "card_item";
+
+    return card;
 }
 
-function createListItemSpan(props) {
-    const text = props.text || "";
-    const element = document.createElement("span");
-    element.className = "user";
-    element.innerHTML = text;
+
+function createUserCardName() {
+    const element = document.createElement("div");
+    element.className = "username";
+
     return element;
 }
 
-function createListItemBtnEdit(props) {
-    const text = props.text || "";
+
+function createUserCardBtnEdit() {
     const buttonEdit = document.createElement("button");
     buttonEdit.type = "button";
     buttonEdit.className = "edit";
-    buttonEdit.innerHTML = text;
+    buttonEdit.innerHTML = "Edit";
 
     buttonEdit.addEventListener("click", () => {
         const newUser = prompt('Введите новое имя');
@@ -121,12 +137,12 @@ function createListItemBtnEdit(props) {
     return buttonEdit;
 }
 
-function createListItemBtnDel(props) {
-    const text = props.text || "";
+
+function createUserCardBtnDel() {
     const buttonDel = document.createElement("button");
     buttonDel.type = "button";
     buttonDel.className = "del";
-    buttonDel.innerHTML = text;
+    buttonDel.innerHTML = "Del";
 
     buttonDel.addEventListener("click", () => {
         const deleteUser = confirm('Удалить пользователя?');
@@ -138,3 +154,20 @@ function createListItemBtnDel(props) {
     return buttonDel;
 }
 
+
+function createUserCard(props) {
+    const card = createUserCardContainer();
+
+    const user = createUserCardName(props);
+    const text = props.text || "";
+    user.innerHTML = text;
+    card.appendChild(user);
+
+    const btn1 = createUserCardBtnEdit();
+    card.appendChild(btn1);
+
+    const btn2 = createUserCardBtnDel();
+    card.appendChild(btn2);
+
+    return card;
+}
