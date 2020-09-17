@@ -5,7 +5,7 @@ function createInputEmail() {
   email.type = "text";
   email.name = "email";
   email.placeholder = "Enter email";
-  
+
   return email;
 }
 
@@ -14,7 +14,7 @@ function createInputPassword() {
   password.type = "password";
   password.name = "password";
   password.placeholder = "Password";
-  
+
   return password;
 }
 
@@ -23,7 +23,7 @@ function createSubmit() {
   button.type = "submit";
   button.innerHTML = "SUBMIT";
   button.disabled = true;
-  
+
   return button
 }
 
