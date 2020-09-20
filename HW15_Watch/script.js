@@ -104,7 +104,7 @@ function getCurrentTime() {
   if (minutes < 10) minutes = "0" + minutes;
   if (seconds < 10) seconds = "0" + seconds;
 
-  // Для вывода времени в консоль достаточно этой функции getCurrentTime без последних 6-и строк кода
+  // Для вывода времени в консоль достаточно этой функции (getCurrentTime) без последних 6-и строк кода
   console.log(`${hours}:${minutes}:${seconds}`);
 
   hour1.innerText = hours[0];
