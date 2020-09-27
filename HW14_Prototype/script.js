@@ -8,12 +8,12 @@ function Unit(type, health, maxHealth, maxDistance) {
 
 // функция принимает один параметр - дистанцию, которую нужно пройти юниту. Функция должна проверить способен ли юнит пройти указанную дистанцию.
 Unit.prototype.isReadyToMove = function (distance) {
-  return distance <= this.maxDistance ? true : false;
+  return distance <= this.maxDistance;
 }
 
 // функция, проверяющая способен ли юнит сражаться. Юнит способен сражаться если его текущее здоровье составляет хотя бы половину от максимально возможного.
 Unit.prototype.isReadyToFight = function () {
-  return (this.health >= this.maxHealth / 2) ? true : false;
+  return this.health >= this.maxHealth / 2;
 }
 
 // функция, которая проверяет был ли ранен юнит. Если был, то восстанавливает здоровье до максимального.
@@ -36,18 +36,12 @@ function Army(defaultUnits) {
 
 // функция принимает один параметр - дистанцию, которую нужно проти армии. Армия способна пройти дистанцию если все юниты способны пройти дистанцию.
 Army.prototype.isReadyToMove = function (distance) {
-  const arr = [];
-  for (const unit of this.units) arr.push(unit.isReadyToMove(distance));
-
-  return arr.every(element => element === true);
+  return this.units.every(unit => unit.isReadyToMove(distance));
 }
 
 // функция, проверяющая способна ли армия сражаться. Армия способна сражаться если все юниты способны сражаться.
 Army.prototype.isReadyToFight = function () {
-  const arr = [];
-  for (const unit of this.units) arr.push(unit.isReadyToFight());
-
-  return arr.every(element => element === true);
+  return this.units.every(unit => unit.isReadyToFight());
 }
 
 // проверка здоровья всех юнитов. Функция восстанавливает здоровье всех раненых юнитов.
@@ -57,12 +51,7 @@ Army.prototype.restore = function () {
 
 // функция принимает один параметр - дистанцию, которую нужно пройти армии. Возвращает массив юнитов, которые способны пройти эту дистанцию.
 Army.prototype.getReadyToMoveUnits = function (distance) {
-  const arr = [];
-
-  for (const unit of this.units) {
-    if (unit.isReadyToMove(distance)) arr.push(unit);
-  }
-  return arr;
+  return this.units.filter(unit => unit.isReadyToMove(distance));
 }
 
 // функция принимает массив юнитов как параметр. Добавляет всех юнитов из этого массива к массиву собственных юнитов.
