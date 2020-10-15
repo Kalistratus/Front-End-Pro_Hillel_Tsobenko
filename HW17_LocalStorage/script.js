@@ -23,7 +23,8 @@ function createDeleteButton() {
   deleteButton.addEventListener("click", (event) => {
     const currentUserItem = event.target.parentElement;
 
-    const usersArray = JSON.parse(localStorage.getItem("users"));
+    const usersArray = parseUsers(localStorage.getItem("users"));
+
     usersArray.splice(usersArray.indexOf(event.target.parentElement.firstElementChild.innerText), 1);
     localStorage.setItem("users", JSON.stringify(usersArray));
 
