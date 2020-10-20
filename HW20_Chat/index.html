@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .chat {
+      width: 500px;
+      margin: 50px auto 0;
+      position: relative;
+      outline: 5px solid #9297c4;
+      background-image: linear-gradient(to bottom, #555fb6, #777eb8);
+    }
+
+    .chat_window {
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 20px 20px;
+      overflow: auto;
+    }
+
+    .chat_window::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .chat_window::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: sandybrown;
+    }
+
+    button {
+      width: 19.5%;
+      border: none;
+      background-color: #434b92;
+      color: white;
+      outline: none;
+    }
+
+    button:active {
+      background-color: white;
+      color: #434b92;
+      transition: all ease 100ms;
+    }
+
+    .input_elements {
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(0, 0, 0, 0.253);
+      box-shadow: 0 -5px 15px 0px rgba(0, 0, 0, 0.253);
+    }
+
+    .my_message {
+      max-width: 70%;
+      background-color: white;
+      margin: 5px 0 5px auto;
+      padding: 5px;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+
+    .bot_message {
+      max-width: 70%;
+      background-color: sandybrown;
+      margin: 5px auto 5px 0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .bot_message_end {
+      background-color: yellow;
+      margin: 5px auto 5px 0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .bot_notice {
+      width: 100px;
+      height: 30px;
+      position: absolute;
+      left: 10px;
+      top: 480px;
+      color: white;
+      display: none;
+    }
+
+    textarea {
+      resize: none;
+      width: 79.5%;
+    }
+
+    textarea:focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
